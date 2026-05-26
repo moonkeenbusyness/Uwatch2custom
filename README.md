@@ -11,6 +11,13 @@ http://www.espruino.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [
 
 [![Build Status](https://travis-ci.org/espruino/Espruino.svg?branch=master)](https://travis-ci.org/espruino/Espruino)
 
+Uwatch2 Custom Fork
+-------------------
+
+This fork keeps Uwatch2-specific build notes in
+[UWATCH2_CUSTOM.md](UWATCH2_CUSTOM.md). The rest of this README is the upstream
+Espruino documentation.
+
 About
 -----
 
