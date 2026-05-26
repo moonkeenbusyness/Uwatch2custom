@@ -1,6 +1,7 @@
-# Uwatch2 Custom Build Notes
+# Uwatch2 Espruino Legacy DFU Notes
 
-このレポジトリは、UMIDIGI Uwatch2 / nRF52832 向けに Espruino をビルドするための小さな fork です。
+このレポジトリは、UMIDIGI Uwatch2 / nRF52832 向けに Espruino Legacy DFU
+package をビルドするための fork です。
 元になっているレポジトリは以下です。
 
 - https://github.com/kabbi/espruino-uwatch
