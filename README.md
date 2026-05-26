@@ -1,3 +1,58 @@
+Uwatch2custom
+=============
+
+このレポジトリは、UMIDIGI Uwatch2 / nRF52832 に Espruino を導入するための
+カスタム build 用 fork です。
+
+目的
+----
+
+Uwatch2 を Nordic DFU bootloader 経由で更新できる状態にし、SD2.0.1 / SDK11
+系 bootloader に合う application-only の Espruino Legacy DFU zip を作成して
+書き込むことを目的にしています。
+
+想定する流れ
+------------
+
+1. Android の DaFlasher などで `DaFitBootloader23Hacked.bin` を書き込む
+2. 続けて `FitBootloaderDFU2.0.1.zip` を書き込み、SD2.0.1 用 bootloader にする
+3. このレポジトリで Uwatch2 用 Espruino application zip を build する
+4. Android の nRF Device Firmware Update / DaFlasher で生成した zip を書き込む
+
+`DaFitBootloader23Hacked.bin` や `FitBootloaderDFU2.0.1.zip` はこのレポジトリには
+含めません。必要に応じて
+[atc1441/DaFlasherFiles](https://github.com/atc1441/DaFlasherFiles) から取得します。
+
+Build
+-----
+
+このレポジトリは firmware 生成物、toolchain、JRE、virtualenv、DaFlasherFiles 由来の
+binary を commit しない方針です。build 前に、少なくとも以下を利用できる状態にします。
+
+- `arm-none-eabi-gcc`
+- `make`
+- Python 3
+- `adafruit-nrfutil` 0.5.x
+- nRF5 SDK11 files under `targetlibs/nrf5x_11`
+
+build command:
+
+```bash
+make clean
+DFU_UPDATE_BUILD=1 BOARD=UWATCH2 RELEASE=1 make
+```
+
+生成される zip は、SD2.0.1 / SDK11 系 bootloader に向けた application-only DFU
+package として扱います。SoftDevice や bootloader を含む zip を不用意に作らないでください。
+
+Notes
+-----
+
+この fork 固有の詳しいメモは [UWATCH2_CUSTOM.md](UWATCH2_CUSTOM.md) にあります。
+元になった Espruino の README は
+[Espruino JavaScript for Microcontrollers](#espruino-javascript-for-microcontrollers)
+から読めます。
+
 Espruino JavaScript for Microcontrollers
 ========================================
 <pre>
@@ -10,13 +65,6 @@ Espruino JavaScript for Microcontrollers
 http://www.espruino.com &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [![Join the chat at https://gitter.im/espruino/Espruino](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/espruino/Espruino?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![Build Status](https://travis-ci.org/espruino/Espruino.svg?branch=master)](https://travis-ci.org/espruino/Espruino)
-
-Uwatch2 Custom Fork
--------------------
-
-This fork keeps Uwatch2-specific build notes in
-[UWATCH2_CUSTOM.md](UWATCH2_CUSTOM.md). The rest of this README is the upstream
-Espruino documentation.
 
 About
 -----
