@@ -27,26 +27,14 @@ info = {
     'build': {
         'optimizeflags': '-Os',
         'libraries': [
-            'BLUETOOTH',
-            'GRAPHICS',
-            'LCD_SPI'
-            # 'TERMINAL',
+            'BLUETOOTH'
         ],
         'makefile': [
             'DEFINES += -DCONFIG_NFCT_PINS_AS_GPIOS',  # Allow the reset pin to work
             'DEFINES+=-DBLUETOOTH_NAME_PREFIX=\'"Uwatch2.js"\'',
-            'DEFINES+=-DCUSTOM_GETBATTERY=jswrap_uwatch_getBattery',
             'DEFINES+=-DDUMP_IGNORE_VARIABLES=\'"g\\0"\'',
-            'DEFINES+=-DUSE_FONT_6X8 -DGRAPHICS_PALETTED_IMAGES',
-            'DFU_PRIVATE_KEY=targets/nrf5x_dfu/dfu_private_key.pem',
-            'DFU_SETTINGS=--application-version 0xff --hw-version 52 --sd-req 0x8C',
-            'INCLUDE += -I$(ROOT)/libs/uwatch -I$(ROOT)/libs/misc',
-            'WRAPPERSOURCES += libs/uwatch/jswrap_uwatch.c',
-            'SOURCES += libs/misc/nmea.c',
-            'JSMODULESOURCES += libs/js/graphical_menu.min.js',
-            'NRF_BL_DFU_INSECURE=1',
-            'LINKER_BOOTLOADER=targetlibs/nrf5x_12/nrf5x_linkers/uwatch_dfu.ld',
-            'LINKER_ESPRUINO=targetlibs/nrf5x_12/nrf5x_linkers/uwatch_espruino.ld'
+            'DFU_SETTINGS=--application-version 0xff --sd-req 0x88',
+            'NRF_SDK11=1'
         ]
     }
 }
@@ -69,8 +57,8 @@ chip = {
         'address': ((118 - 10) * 4096),
         'page_size': 4096,
         'pages': 10,
-        # Softdevice uses 31 pages of flash, bootloader 8, FS 2, code 10. Each page is 4 kb.
-        'flash_available': 512 - ((31 + 8 + 2 + 10)*4)
+        # SoftDevice S132 2.x uses 28 pages, bootloader 8, FS 2, code 10. Each page is 4 kb.
+        'flash_available': 512 - ((28 + 8 + 2 + 10)*4)
     },
 }
 

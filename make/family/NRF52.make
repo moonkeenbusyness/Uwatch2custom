@@ -25,7 +25,11 @@ SOFTDEVICE        = $(SOFTDEVICE_PATH)/hex/s132_nrf52_6.0.0_softdevice.hex
 PRECOMPILED_OBJS += $(NRF5X_SDK_PATH)/modules/nrfx/mdk/gcc_startup_nrf52.S
 endif
 else # not SDK15
+ifdef NRF_SDK11
+PRECOMPILED_OBJS += $(NRF5X_SDK_PATH)/components/toolchain/gcc/gcc_startup_nrf52.s
+else
 PRECOMPILED_OBJS += $(NRF5X_SDK_PATH)/components/toolchain/gcc/gcc_startup_nrf52.o
+endif
 TARGETSOURCES    += $(NRF5X_SDK_PATH)/components/toolchain/system_nrf52.c
 ifdef NRF_SDK14
 # Use SDK14
