@@ -464,7 +464,11 @@ int jswrap_uwatch_accelRd(JsVarInt reg) {
 Reboot to bootloader
 */
 void jswrap_uwatch_reboot() {
+#if NRF_SD_BLE_API_VERSION < 3
+  sd_power_gpregret_set(0x42);
+#else
   sd_power_gpregret_set(0, 0x42);
+#endif
   sd_nvic_SystemReset();
 }
 

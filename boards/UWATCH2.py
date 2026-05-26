@@ -27,12 +27,20 @@ info = {
     'build': {
         'optimizeflags': '-Os',
         'libraries': [
-            'BLUETOOTH'
+            'BLUETOOTH',
+            'GRAPHICS',
+            'LCD_SPI'
         ],
         'makefile': [
             'DEFINES += -DCONFIG_NFCT_PINS_AS_GPIOS',  # Allow the reset pin to work
             'DEFINES+=-DBLUETOOTH_NAME_PREFIX=\'"Uwatch2.js"\'',
+            'DEFINES+=-DUWATCH',
+            'DEFINES+=-DCUSTOM_GETBATTERY=jswrap_uwatch_getBattery',
             'DEFINES+=-DDUMP_IGNORE_VARIABLES=\'"g\\0"\'',
+            'INCLUDE += -I$(ROOT)/libs/uwatch -I$(ROOT)/libs/misc',
+            'WRAPPERSOURCES += libs/uwatch/jswrap_uwatch.c',
+            'USE_DEBUGGER=0',
+            'USE_TAB_COMPLETE=0',
             'DFU_SETTINGS=--application-version 0xff --sd-req 0x88',
             'NRF_SDK11=1'
         ]
@@ -53,12 +61,13 @@ chip = {
     'adc': 1,
     'dac': 0,
     'saved_code': {
-        # Bootloader takes pages 120-127, FS takes 118-119
-        'address': ((118 - 10) * 4096),
+        # Bootloader takes pages 120-127, FS takes 118-119.
+        # Graphics/LCD support needs more flash, so keep Espruino Storage to pages 114-117.
+        'address': ((118 - 4) * 4096),
         'page_size': 4096,
-        'pages': 10,
-        # SoftDevice S132 2.x uses 28 pages, bootloader 8, FS 2, code 10. Each page is 4 kb.
-        'flash_available': 512 - ((28 + 8 + 2 + 10)*4)
+        'pages': 4,
+        # SoftDevice S132 2.x uses 28 pages, bootloader 8, FS 2, code 4. Each page is 4 kb.
+        'flash_available': 512 - ((28 + 8 + 2 + 4)*4)
     },
 }
 
