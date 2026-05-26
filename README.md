@@ -16,8 +16,8 @@ Uwatch2 を Nordic DFU bootloader 経由で更新できる状態にし、SD2.0.1
 
 1. Android の DaFlasher などで `DaFitBootloader23Hacked.bin` を書き込む
 2. 続けて `FitBootloaderDFU2.0.1.zip` を書き込み、SD2.0.1 用 bootloader にする
-3. このレポジトリで Uwatch2 用 Espruino application zip を build する
-4. Android の nRF Device Firmware Update / DaFlasher で生成した zip を書き込む
+3. GitHub Releases の Uwatch2 用 Espruino application zip を使うか、このレポジトリで同等の zip を build する
+4. Android の nRF Device Firmware Update / DaFlasher で、取得または生成した zip を書き込む
 
 `DaFitBootloader23Hacked.bin` や `FitBootloaderDFU2.0.1.zip` はこのレポジトリには
 含めません。必要に応じて
